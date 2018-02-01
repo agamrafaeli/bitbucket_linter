@@ -130,11 +130,13 @@ class PyLinter:
                 continue
 
             # Generate the message content.
+            msg = data["msg"].replace("\\n", "\n")
+            msg += "\nLine: " + data["line"]
             content = "%(category)s (%(msg_id)s %(symbol)s):\n\n```\n%(msg)s\n```\n" % {
                 "category": data["category"].upper(),
                 "msg_id": data["msg_id"],
                 "symbol": data["symbol"],
-                "msg": data["msg"].replace("\\n", "\n"),
+                "msg": msg,
             }
             had_comments = True
 
